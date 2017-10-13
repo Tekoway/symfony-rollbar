@@ -1,0 +1,14 @@
+services:
+    tekoway.manager.rollbar:
+        class: Tekoway\Rollbar\Services\RollbarManager
+        arguments: ['', '', '-1', true]
+
+    tekoway.logger.rollbar:
+        class: Tekoway\Rollbar\Services\RollbarLogger
+        arguments: ['@tekoway.manager.rollbar']
+
+    tekoway.listener.rollbar_exception:
+        class: Tekoway\Rollbar\EventListener\ErrorListener
+        arguments: ['@tekoway.manager.rollbar', '@request_stack']
+        tags:
+          - {name: 'kernel.event_subscriber'}

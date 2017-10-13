@@ -1,0 +1,5 @@
+composer.phar
+composer.lock
+vendor
+UnitTests/app/cache
+UnitTests/app/logs
