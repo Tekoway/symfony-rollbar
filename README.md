@@ -52,10 +52,11 @@ tekoway_rollbar:
     error_levels: ~
 ```
 Parameters explanation:
-`environment`: a string value (Environment parameter which will be send to Rollbar).
-`enabled`: a bool value (true|false) - allow the bundle to send automatically errors/exceptions to rollbar (default value is false).
-`error_levels`: an array that contains the error types to send to rollbar (see [Predefined Constants](http://php.net/manual/en/errorfunc.constants.php) ).
-full config example:
+`environment`: a string value (Environment parameter which will be send to Rollbar).    
+`enabled`: a bool value (true|false) - allow the bundle to send automatically errors/exceptions to rollbar (default value is false).   
+`error_levels`: an array that contains the error types allowed to send to rollbar automatically (see [Predefined Constants](http://php.net/manual/en/errorfunc.constants.php) ).   
+
+Full config example:
 ```yml
     access_token: YOUR_ROLLBAR_ACCESS_TOKEN
     environment: production
