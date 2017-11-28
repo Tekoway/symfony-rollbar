@@ -59,6 +59,9 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('enabled')
                     ->defaultValue(false)
                     ->end()
+                ->arrayNode('exceptions_ignore_list')
+                    ->prototype('scalar')
+                    ->end()
                 ->end();
 
         return $treeBuilder;
