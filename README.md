@@ -50,11 +50,13 @@ tekoway_rollbar:
     environment: ~
     enabled: ~
     error_levels: ~
+    exceptions_ignore_list: ~
 ```
 Parameters explanation:
 `environment`: a string value (Environment parameter which will be send to Rollbar).    
 `enabled`: a bool value (true|false) - allow the bundle to send automatically errors/exceptions to rollbar (default value is false).   
-`error_levels`: an array that contains the error types allowed to send to rollbar automatically (see [Predefined Constants](http://php.net/manual/en/errorfunc.constants.php) ).   
+`error_levels`: an array that contains the error types allowed to send to rollbar automatically (see [Predefined Constants](http://php.net/manual/en/errorfunc.constants.php) ).
+`exceptions_ignore_list`: an array that contains the list of exceptions to be ignored in rollbar reporting process (see [Symfony Exceptions List](https://gist.github.com/feyyazesat/c65ccfde12839c03c610) ).   
 
 Full config example:
 ```yml
@@ -77,6 +79,10 @@ Full config example:
         - E_DEPRECATED
         - E_USER_DEPRECATED
         - E_ALL #include all above list
+    exceptions_ignore_list: 
+        - Symfony\Component\Security\Core\Exception\AccessDeniedException
+        - Symfony/Component/Security/Core/Exception/AuthenticationException.php
+        - #other exceptions
 ```
 Step 4: use 
 -----------

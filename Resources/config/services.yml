@@ -1,7 +1,7 @@
 services:
     tekoway.manager.rollbar:
         class: Tekoway\Rollbar\Services\RollbarManager
-        arguments: ['', '', '-1', true]
+        arguments: ['', '', '-1', true, []]
 
     tekoway.logger.rollbar:
         class: Tekoway\Rollbar\Services\RollbarLogger

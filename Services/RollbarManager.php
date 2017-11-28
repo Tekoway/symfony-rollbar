@@ -18,14 +18,21 @@ class RollbarManager
     private $enabled;
 
     /**
+     * @var array
+     */
+    private $exceptionsIgnoreList;
+
+    /**
      * @param string    $token      
      * @param string    $env        
      * @param int       $errorLevel 
-     * @param boolean   $enabled    
+     * @param boolean   $enabled
+     * @param array     $exceptionsIgnoreList
      */
-    public function __construct($token, $env, $errorLevels, $enabled){
+    public function __construct($token, $env, $errorLevels, $enabled, $exceptionsIgnoreList){
         $this->errorLevels = $errorLevels;
         $this->enabled = $enabled;
+        $this->exceptionsIgnoreList = $exceptionsIgnoreList;
         Rollbar::init([
             'access_token' => $token,
             'environment' => $env
@@ -43,7 +50,7 @@ class RollbarManager
         if(method_exists($exception, 'getSeverity')){
             $level = $exception->getSeverity();
         }
-        if($this->enabled && $this->isLevelAllowed($level)){
+        if($this->enabled && $this->isLevelAllowed($level) && !$this->isIgnored($exception)){
             Rollbar::log(Level::ERROR, $exception, $extraData);
             $response = true;
         }
@@ -97,5 +104,23 @@ class RollbarManager
             }
         }
         return $isAllowed && (error_reporting() & $level);
+    }
+
+    /**
+     * @param \Exception $exception
+     * @return bool
+     */
+    protected function isIgnored(\Exception $exception){
+        $isIgnored = false;
+        if (is_array($this->exceptionsIgnoreList) && count($this->exceptionsIgnoreList) > 0) {
+            foreach($this->exceptionsIgnoreList as $ignoredException){
+                if($exception instanceof $ignoredException){
+                    $isIgnored = true;
+                    break;
+                }
+            }
+        }
+
+        return $isIgnored;
     }
 }

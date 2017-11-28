@@ -30,5 +30,6 @@ class TekowayRollbarExtension extends Extension
         $def->replaceArgument(1, $config['environment']);
         $def->replaceArgument(2, $config['error_levels']);
         $def->replaceArgument(3, $config['enabled']);
+        $def->replaceArgument(4, $config['exceptions_ignore_list']);
     }
 }
