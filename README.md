@@ -50,6 +50,7 @@ tekoway_rollbar:
     environment: ~
     enabled: ~
     error_levels: ~
+    exceptions_ignore_list: ~
 ```
 Parameters explanation:
 `environment`: a string value (Environment parameter which will be send to Rollbar).    
